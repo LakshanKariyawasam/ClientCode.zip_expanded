@@ -45,10 +45,10 @@ public class UserHome extends JFrame {
 			public void run() {
 				try {
 					QuestionSet questionnaire = new QuestionSet();
-					String val = questionnaire.reportAnswers();
+//					String val = questionnaire.reportAnswers();
 					
 					
-					System.out.println("quection set 001::::: " + val );
+//					System.out.println("quection set 001::::: " + val );
 					
 					
 					

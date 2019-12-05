@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.util.ArrayList;
 
 import com.perisic.beds.peripherals.ShowImageFromURL;
 import com.perisic.beds.rmiinterface.RemoteQuestions;
@@ -89,7 +90,7 @@ public class QuestionSet {
 	/** 
 	 * Reports the answers in various ways. 
 	 */
-	public String reportAnswers() { 
+	public ArrayList<ArrayList<String>> reportAnswers() { 
 
 		try {
 			Answers myAnswers = new Answers(myQuestions.getData());
@@ -97,7 +98,7 @@ public class QuestionSet {
 			System.out.println("Basic analysis:");
 			System.out.println(myAnswers.getJSON());
 
-			ShowImageFromURL.show(myAnswers.getBarChartURL());
+//			ShowImageFromURL.show(myAnswers.getBarChartURL());
 			
 			return myAnswers.getJSON();
 		} catch (RemoteException e) {

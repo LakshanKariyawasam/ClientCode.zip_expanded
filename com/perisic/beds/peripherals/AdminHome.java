@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -44,9 +45,13 @@ import java.awt.GridLayout;
 import java.awt.FlowLayout;
 //import net.miginfocom.swing.MigLayout;
 import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import com.perisic.beds.questionnaire.Answers;
 import com.perisic.beds.questionnaire.QuestionSet;
+
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
 import javax.swing.ListSelectionModel;
 
@@ -60,20 +65,21 @@ public class AdminHome extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+
+			private ArrayList<ArrayList<String>> value;
+
 			public void run() {
 				try {
 					
 					QuestionSet questionnaire = new QuestionSet();
-//					String val = questionnaire.reportAnswers();
+					this.value = questionnaire.reportAnswers();
 					
-					String val 
+//					String val 
+//					
+					System.out.println("quection set 001::::: " + this.value );
+
 					
-					System.out.println("quection set 001::::: " + val );
-					
-					
-					
-					
-					AdminHome frame = new AdminHome();
+					AdminHome frame = new AdminHome(this.value);
 //					frame.setUndecorated(true);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
@@ -87,14 +93,18 @@ public class AdminHome extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AdminHome() {
+	public AdminHome(ArrayList<ArrayList<String>> value) {
 
 		// headers for the table
 		String[] columns = new String[] { "Id", "Quection", "Answer Type", "Status", "",
 				"" };
-
+		DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
 		// actual data for the table in a 2d array
-		Object[][] data = new Object[][] { { 1, val, "Paul",  "Active", "Edit", "Remove" }, };
+		 
+//			for(int i = 0; i < value.quesData.size(); i++ ) { 
+//				Object[] data = new Object[] { 1, quesData.get(i) , value.enumData.get(i),  "Active", "Edit", "Remove" };
+//				tableModel.addRow(data);
+//			}
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AdminHome.class.getResource("/Images/PQ.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -194,7 +204,7 @@ public class AdminHome extends JFrame {
 				gl_panel_4.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_4.createSequentialGroup().addGap(60)
 						.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
 
-		JTable table = new JTable(data, columns);
+		JTable table = new JTable(tableModel);
 		table.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
 		table.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField()));
 		table.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());

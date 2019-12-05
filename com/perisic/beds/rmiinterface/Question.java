@@ -15,6 +15,7 @@ public class Question implements Serializable {
 	private static final long serialVersionUID = -7273230871957691871L;
 	private String [] answers; 
 	private String questionText; 
+	private String answerType; 
 	private Hashtable<String,Integer> frequencies = new Hashtable<String,Integer>(); 
 
 	/**
@@ -22,10 +23,11 @@ public class Question implements Serializable {
 	 * @param questionText Text of the questions.
 	 * @param answers Options to choose from. 
 	 */
-	public Question(String questionText, String[] answers) {
+	public Question(String questionText, String answerType, String[] answers) {
 		super();
 		this.answers = answers;
 		this.questionText = questionText;
+		this.answerType = answerType;
 	}
 
 	/**
@@ -36,6 +38,14 @@ public class Question implements Serializable {
 		return questionText; 
 	}
 
+	/**
+	 * What is the amswer type? 
+	 * @return the amswer type. 
+	 */
+	public String getAnswerType() { 
+		return answerType; 
+	}
+	
 	/** 
 	 * What are the options? 
 	 * @return all the possible answers from which to choose from. 

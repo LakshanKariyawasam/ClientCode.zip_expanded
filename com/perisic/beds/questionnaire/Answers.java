@@ -5,10 +5,11 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.perisic.beds.rmiinterface.Question;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 /**
  * This class provides represents a set of answered questions and methods are provided 
@@ -34,12 +35,12 @@ public class Answers {
 	/**
 	 * This method is an example of a simple POST request to send JSON data to a web service and retrieves
 	 * a bar chart with the results. 
-	 * @param what The data encoded as JSON. 
+	 * @param arrayList The data encoded as JSON. 
 	 * @return An URL from where to retrieve a bar chart with the data. 
 	 * @throws Exception
 	 */
 
-	private String getImageFromData(String what) {
+	private String getImageFromData(ArrayList<ArrayList<String>> arrayList) {
 
 		try {
 			String url = "http://perisic.com/uob/analysis.php";
@@ -54,7 +55,7 @@ public class Answers {
 			con.setRequestProperty("User-Agent", "CIS007-3 Example Code 18/19");
 
 
-			String urlParameters = "data="+what;
+			String urlParameters = "data="+arrayList;
 
 			// Send post request
 			con.setDoOutput(true);
@@ -117,11 +118,15 @@ public class Answers {
 	 * @return
 	 */
 
-	public String getJSON() {
+	public ArrayList<ArrayList<String>> getJSON() {
 
 		String report = "{"; 
+	     ArrayList<ArrayList<String> > Options =  new ArrayList<ArrayList<String> >(); 
+		ArrayList<String> quesData = new ArrayList<String>();
+		ArrayList<String> enumData = new ArrayList<String>();
 		for(int i = 0; i < myData.size(); i++ ) { 
 			Question qq = myData.elementAt(i);
+			quesData.add(qq.getQuestionText());
 			if( i > 0 ) { report += ","; }
 			report += "\"" + qq.getQuestionText() +"\": {"; 
 
@@ -130,10 +135,14 @@ public class Answers {
 				if( j > 0 ) { report += ","; } 
 				report += "\""+answers[j]+"\" : "+ qq.getFrequency(answers[j]);
 			}
+			enumData.add(report);
 			report += "}";
+			Options.add(quesData);
+			Options.add(enumData);
+			
 		}
 		report += "}"; 
-		return report; 
+		return Options; 
 	}
 
 
