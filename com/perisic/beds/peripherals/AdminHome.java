@@ -1,0 +1,375 @@
+package com.perisic.beds.peripherals;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.SystemColor;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
+
+import java.awt.Panel;
+import java.awt.Button;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Canvas;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+
+import java.awt.ScrollPane;
+import java.awt.Label;
+import java.awt.Toolkit;
+
+import javax.swing.DefaultCellEditor;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+//import net.miginfocom.swing.MigLayout;
+import javax.swing.border.EtchedBorder;
+import javax.swing.table.TableCellRenderer;
+
+import com.perisic.beds.questionnaire.QuestionSet;
+
+import javax.swing.ListSelectionModel;
+
+public class AdminHome extends JFrame {
+
+	private JPanel contentPane;
+	private int val = 0;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					
+					QuestionSet questionnaire = new QuestionSet();
+//					String val = questionnaire.reportAnswers();
+					
+					String val 
+					
+					System.out.println("quection set 001::::: " + val );
+					
+					
+					
+					
+					AdminHome frame = new AdminHome();
+//					frame.setUndecorated(true);
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public AdminHome() {
+
+		// headers for the table
+		String[] columns = new String[] { "Id", "Quection", "Answer Type", "Status", "",
+				"" };
+
+		// actual data for the table in a 2d array
+		Object[][] data = new Object[][] { { 1, val, "Paul",  "Active", "Edit", "Remove" }, };
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage(AdminHome.class.getResource("/Images/PQ.png")));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1036, 667);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.setBackground(new Color(232, 241, 248));
+
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(51, 59, 78));
+		panel.setBounds(0, 57, 216, 621);
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("Dashboard");
+		mntmNewMenuItem.setBackground(new Color(91, 98, 113));
+		mntmNewMenuItem.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		mntmNewMenuItem.setIconTextGap(10);
+		mntmNewMenuItem.setBorder(null);
+		mntmNewMenuItem.setIcon(new ImageIcon(UserHome.class.getResource("/Images/home.png")));
+		mntmNewMenuItem.setForeground(Color.WHITE);
+		mntmNewMenuItem.setBounds(0, 0, 216, 59);
+		panel.add(mntmNewMenuItem);
+
+		JMenuItem mntmStudentQuiz = new JMenuItem("User Maintenance");
+		mntmStudentQuiz.setBackground(new Color(51, 59, 78));
+		mntmStudentQuiz.setIcon(new ImageIcon(AdminHome.class.getResource("/Images/user_ Maintenance.png")));
+		mntmStudentQuiz.setIconTextGap(10);
+		mntmStudentQuiz.setForeground(Color.WHITE);
+		mntmStudentQuiz.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		mntmStudentQuiz.setBorder(null);
+		mntmStudentQuiz.setBounds(0, 60, 216, 59);
+		panel.add(mntmStudentQuiz);
+
+		JMenuItem mntmQuizMaintenance = new JMenuItem("Quiz Maintenance");
+		mntmQuizMaintenance.setIcon(new ImageIcon(AdminHome.class.getResource("/Images/question_ Maintenance.png")));
+		mntmQuizMaintenance.setIconTextGap(10);
+		mntmQuizMaintenance.setForeground(Color.WHITE);
+		mntmQuizMaintenance.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		mntmQuizMaintenance.setBorder(null);
+		mntmQuizMaintenance.setBackground(new Color(51, 59, 78));
+		mntmQuizMaintenance.setBounds(0, 120, 216, 59);
+		panel.add(mntmQuizMaintenance);
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 191, 169));
+		panel_1.setBounds(0, 0, 216, 57);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+
+		JLabel label = new JLabel("PATH QUIZ");
+		label.setBounds(27, 16, 148, 30);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
+		panel_1.add(label);
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+		panel_2.setBounds(215, 0, 852, 57);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+
+		Label label_1 = new Label("X");
+		label_1.setBounds(781, 10, -29, 22);
+		panel_2.add(label_1);
+
+		JLabel label_2 = new JLabel("");
+		label_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Login frame = new Login();
+				frame.setUndecorated(true);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				AdminHome.this.dispose();
+			}
+		});
+		label_2.setIcon(new ImageIcon(AdminHome.class.getResource("/Images/close.png")));
+		label_2.setBounds(775, 10, 46, 25);
+		panel_2.add(label_2);
+
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.WHITE);
+		contentPane.add(panel_4);
+		panel_4.setBounds(236, 81, 784, 570);
+
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(Color.WHITE);
+		panel_5.setForeground(Color.BLACK);
+		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+		gl_panel_4.setHorizontalGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup().addContainerGap()
+						.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE).addContainerGap()));
+		gl_panel_4.setVerticalGroup(
+				gl_panel_4.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_4.createSequentialGroup().addGap(60)
+						.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE).addContainerGap()));
+
+		JTable table = new JTable(data, columns);
+		table.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
+		table.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField()));
+		table.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
+		table.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor(new JTextField()));
+		
+		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		table.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		panel_5.setLayout(new BorderLayout(0, 0));
+		table.setFont(new Font("Arial", Font.PLAIN, 14));
+		table.setForeground(SystemColor.controlDkShadow);
+
+		// add the table to the frame
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setViewportBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_5.add(scrollPane);
+		panel_4.setLayout(gl_panel_4);
+
+		Canvas canvas = new Canvas();
+		canvas.setBackground(new Color(0, 191, 169));
+		canvas.setBounds(236, 81, 784, 14);
+		contentPane.add(canvas);
+
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
+		panel_3.setBounds(236, 81, 784, 570);
+//		contentPane.add(panel_3);
+		panel_3.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(10, -248, 784, 570);
+		lblNewLabel.setIcon(new ImageIcon(AdminHome.class.getResource("/Images/bar.png")));
+		panel_3.add(lblNewLabel);
+
+		JLabel label_3 = new JLabel("");
+		label_3.setIcon(new ImageIcon(AdminHome.class.getResource("/Images/output-onlinepngtools (1).png")));
+		label_3.setBounds(68, 24, 628, 423);
+		panel_3.add(label_3);
+
+//		JScrollPane  scrollPane = new JScrollPane (panel_3, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+//		scrollPane.setEnabled(true);
+//		scrollPane.setBounds(0, 0, 784, 570);
+//		scrollPane.getViewport().setBackground(Color.WHITE);
+//		panel_3.setAutoscrolls(true);
+
+		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mntmNewMenuItem.setBackground(new Color(91, 98, 113));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (val == 0 || val == 2) {
+					mntmNewMenuItem.setBackground(new Color(51, 59, 78));
+				}
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				val = 1;
+				mntmNewMenuItem.setBackground(new Color(91, 98, 113));
+				mntmStudentQuiz.setBackground(new Color(51, 59, 78));
+				panel_4.setVisible(false);
+				panel_3.setVisible(true);
+			}
+		});
+
+		mntmStudentQuiz.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mntmStudentQuiz.setBackground(new Color(91, 98, 113));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (val == 0 || val == 1) {
+					mntmStudentQuiz.setBackground(new Color(51, 59, 78));
+				}
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				val = 2;
+				mntmStudentQuiz.setBackground(new Color(91, 98, 113));
+				mntmNewMenuItem.setBackground(new Color(51, 59, 78));
+				panel_3.setVisible(false);
+				contentPane.add(panel_4);
+				panel_4.setVisible(true);
+			}
+		});
+
+	}
+
+}
+
+//BUTTON RENDERER CLASS
+class ButtonRenderer extends JButton implements TableCellRenderer {
+
+//CONSTRUCTOR
+	public ButtonRenderer() {
+		// SET BUTTON PROPERTIES
+		setOpaque(true);
+	}
+
+	@Override
+	public Component getTableCellRendererComponent(JTable table, Object obj, boolean selected, boolean focused, int row,
+			int col) {
+
+		// SET PASSED OBJECT AS BUTTON TEXT
+		setText((obj == null) ? "" : obj.toString());
+
+		return this;
+	}
+
+}
+
+//BUTTON EDITOR CLASS
+class ButtonEditor extends DefaultCellEditor {
+	protected JButton btn;
+	private String lbl;
+	private Boolean clicked;
+
+	public ButtonEditor(JTextField txt) {
+		super(txt);
+
+		btn = new JButton();
+		btn.setOpaque(true);
+
+		// WHEN BUTTON IS CLICKED
+		btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				fireEditingStopped();
+			}
+		});
+	}
+
+	// OVERRIDE A COUPLE OF METHODS
+	@Override
+	public Component getTableCellEditorComponent(JTable table, Object obj, boolean selected, int row, int col) {
+
+		// SET TEXT TO BUTTON,SET CLICKED TO TRUE,THEN RETURN THE BTN OBJECT
+		lbl = (obj == null) ? "" : obj.toString();
+		btn.setText(lbl);
+		clicked = true;
+		return btn;
+	}
+
+//IF BUTTON CELL VALUE CHNAGES,IF CLICKED THAT IS
+	@Override
+	public Object getCellEditorValue() {
+
+		if (clicked) {
+			// SHOW US SOME MESSAGE
+			JOptionPane.showMessageDialog(btn, lbl + " Clicked");
+		}
+		// SET IT TO FALSE NOW THAT ITS CLICKED
+		clicked = false;
+		return new String(lbl);
+	}
+
+	@Override
+	public boolean stopCellEditing() {
+
+		// SET CLICKED TO FALSE FIRST
+		clicked = false;
+		return super.stopCellEditing();
+	}
+
+	@Override
+	protected void fireEditingStopped() {
+		// TODO Auto-generated method stub
+		super.fireEditingStopped();
+	}
+}
