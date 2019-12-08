@@ -150,23 +150,23 @@ public class QuestionSet {
 	
 	
 	public boolean getSurveyAccess( String username, String pass) throws RemoteException{
-		JFrame f = new JFrame("Window");
-		f.setUndecorated(true);
-		f.setBounds(100, 100, 344, 450);
-		f.setLocationRelativeTo(null);
-		AWTUtilities.setWindowOpacity(f, 0.1f);
-		f.setOpacity(0.8f);
-		LoadingPanel imagePanel = new LoadingPanel();
-		JPanel jp = null;
-		try {
-			jp = imagePanel.LoadingPanel();
-		} catch (Exception ex) {
-			Logger.getLogger(LoadingPanel.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		f.setContentPane(jp);
-		f.setBackground(new Color(0, 0, 0, 0)); // <-- THIS CAUSES FLICKERING
+//		JFrame f = new JFrame("Window");
+//		f.setUndecorated(true);
+//		f.setBounds(100, 100, 344, 450);
+//		f.setLocationRelativeTo(null);
+//		AWTUtilities.setWindowOpacity(f, 0.1f);
+//		f.setOpacity(0.8f);
+//		LoadingPanel imagePanel = new LoadingPanel();
+//		JPanel jp = null;
+//		try {
+//			jp = imagePanel.LoadingPanel();
+//		} catch (Exception ex) {
+//			Logger.getLogger(LoadingPanel.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+//		f.setContentPane(jp);
+//		f.setBackground(new Color(0, 0, 0, 0)); // <-- THIS CAUSES FLICKERING
 //            f.pack();
-		f.setVisible(true);
+//		f.setVisible(true);
         return myQuestions.getSurveyAccess(username, pass);
     }
 	

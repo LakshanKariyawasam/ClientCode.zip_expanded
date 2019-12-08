@@ -225,7 +225,7 @@ public class AdminHome extends JFrame {
 				String lbl_Status = null;
 				
 				final String[] status = { "Active", "Inactive" };
-				final String[] answer_type = { "RANGE" , "SINGLEOPT" , "JOB" , "EDULVL" , "USEROPT" , "CHOICE" , "CHOICE2" , "LOGICAL" };
+				final String[] answer_type = { "RANGE" , "SINGLEOPT" , "JOB" , "EDULVL" , "USEROPT" , "CHOICE" , "CHOICE2" , "LOGICAL", "RATING" };
 				Boolean statusVal;
 
 				JTextField questionField = new JTextField(1);
