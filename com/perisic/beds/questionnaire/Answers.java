@@ -121,9 +121,10 @@ public class Answers {
 	public ArrayList<ArrayList<String>> getJSON() {
 
 		String report = "{"; 
-	     ArrayList<ArrayList<String> > Options =  new ArrayList<ArrayList<String> >(); 
+	     ArrayList<ArrayList<String>> Options =  new ArrayList<ArrayList<String>>(); 
 		ArrayList<String> quesData = new ArrayList<String>();
 		ArrayList<String> enumData = new ArrayList<String>();
+		ArrayList<String> statusData = new ArrayList<String>();
 		for(int i = 0; i < myData.size(); i++ ) { 
 			Question qq = myData.elementAt(i);
 			quesData.add(qq.getQuestionText());
@@ -135,12 +136,22 @@ public class Answers {
 				if( j > 0 ) { report += ","; } 
 				report += "\""+answers[j]+"\" : "+ qq.getFrequency(answers[j]);
 			}
-			enumData.add(report);
+			enumData.add(qq.getAnswerType());
+			
+			String valStatus;
+			if(qq.getStatus().toString().equals("true")){
+				valStatus = "Active";
+			} else {
+				valStatus = "Inactive";
+			}
+			statusData.add(valStatus);
 			report += "}";
-			Options.add(quesData);
-			Options.add(enumData);
 			
 		}
+		
+		Options.add(enumData);
+		Options.add(quesData);
+		Options.add(statusData);
 		report += "}"; 
 		return Options; 
 	}

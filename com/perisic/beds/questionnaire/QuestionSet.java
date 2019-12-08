@@ -1,14 +1,22 @@
 package com.perisic.beds.questionnaire;
 
+import java.awt.Color;
 import java.io.UnsupportedEncodingException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.perisic.beds.peripherals.LoadingPanel;
 import com.perisic.beds.peripherals.ShowImageFromURL;
 import com.perisic.beds.rmiinterface.RemoteQuestions;
+import com.sun.awt.AWTUtilities;
 /**
  * Represents the questionnaire locally. All requests from peripherals will be 
  * through this class. 
@@ -26,6 +34,7 @@ public class QuestionSet {
 		super();
 		try {
 			myQuestions =   (RemoteQuestions) Naming.lookup("rmi://localhost/quizepathservice");
+//			myQuestions.addQuestionToSurvey(questionDesc, option, status);
 		} catch (Exception e) {
 			System.out.println("A problem occured: "+e.toString());
 			e.printStackTrace();
@@ -87,6 +96,36 @@ public class QuestionSet {
 			e.printStackTrace();
 		} 
 	}
+	/**
+	 * Submit the edited question.
+	 * @param i the question.
+	 * @return 
+	 */
+	public Integer updateQuestionPane(String description, int quesId, Boolean status) { 
+		Integer val = null;
+		try {
+			val = myQuestions.updateQuestionPane(description, quesId, status);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return val; 
+	}
+	/**
+	 * Submit the new question.
+	 * @param i the question.
+	 * @return 
+	 */
+	public Integer addQuestionToSurvey(String questionDesc, String option, Boolean status) { 
+		Integer val = null;
+		try {
+			val = myQuestions.addQuestionToSurvey(questionDesc, option, status);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return val; 
+	}
 	/** 
 	 * Reports the answers in various ways. 
 	 */
@@ -95,7 +134,7 @@ public class QuestionSet {
 		try {
 			Answers myAnswers = new Answers(myQuestions.getData());
 
-			System.out.println("Basic analysis:");
+			System.out.println("Basic analysis:" + myAnswers);
 			System.out.println(myAnswers.getJSON());
 
 //			ShowImageFromURL.show(myAnswers.getBarChartURL());
@@ -111,7 +150,45 @@ public class QuestionSet {
 	
 	
 	public boolean getSurveyAccess( String username, String pass) throws RemoteException{
+		JFrame f = new JFrame("Window");
+		f.setUndecorated(true);
+		f.setBounds(100, 100, 344, 450);
+		f.setLocationRelativeTo(null);
+		AWTUtilities.setWindowOpacity(f, 0.1f);
+		f.setOpacity(0.8f);
+		LoadingPanel imagePanel = new LoadingPanel();
+		JPanel jp = null;
+		try {
+			jp = imagePanel.LoadingPanel();
+		} catch (Exception ex) {
+			Logger.getLogger(LoadingPanel.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		f.setContentPane(jp);
+		f.setBackground(new Color(0, 0, 0, 0)); // <-- THIS CAUSES FLICKERING
+//            f.pack();
+		f.setVisible(true);
         return myQuestions.getSurveyAccess(username, pass);
+    }
+	
+	public int createPaneUser( String currntUserName, String usrname, String pswd, boolean isSuper) throws RemoteException{
+		JFrame f = new JFrame("Window");
+		f.setUndecorated(true);
+		f.setBounds(100, 100, 344, 450);
+		f.setLocationRelativeTo(null);
+		AWTUtilities.setWindowOpacity(f, 0.1f);
+		f.setOpacity(0.8f);
+		LoadingPanel imagePanel = new LoadingPanel();
+		JPanel jp = null;
+		try {
+			jp = imagePanel.LoadingPanel();
+		} catch (Exception ex) {
+			Logger.getLogger(LoadingPanel.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		f.setContentPane(jp);
+		f.setBackground(new Color(0, 0, 0, 0)); // <-- THIS CAUSES FLICKERING
+//            f.pack();
+		f.setVisible(true);
+        return myQuestions.createPaneUser(currntUserName, usrname, pswd, isSuper);
     }
 
 

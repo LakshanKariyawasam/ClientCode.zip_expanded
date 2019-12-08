@@ -1,6 +1,7 @@
 package com.perisic.beds.rmiinterface;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Hashtable;
 /**
  * Question and how often the question was answered.
@@ -16,6 +17,7 @@ public class Question implements Serializable {
 	private String [] answers; 
 	private String questionText; 
 	private String answerType; 
+	private Boolean questionStatus;
 	private Hashtable<String,Integer> frequencies = new Hashtable<String,Integer>(); 
 
 	/**
@@ -46,6 +48,13 @@ public class Question implements Serializable {
 		return answerType; 
 	}
 	
+	/**
+	 * What is the status? 
+	 * @return the status. 
+	 */
+	public Boolean getStatus() { 
+		return questionStatus; 
+	}
 	/** 
 	 * What are the options? 
 	 * @return all the possible answers from which to choose from. 

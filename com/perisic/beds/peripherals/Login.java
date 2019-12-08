@@ -8,6 +8,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import com.perisic.beds.questionnaire.QuestionSet;
+import com.sun.awt.AWTUtilities;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,14 +36,19 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.beans.PropertyChangeEvent;
+import java.awt.Label;
+import java.awt.Panel;
+import javax.swing.BoxLayout;
 
 public class Login extends JFrame {
 
 	private QuestionSet questionnaire = new QuestionSet();
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txt_username;
+	private JTextField txt_password;
 	private String userName;
 	private String password;
 	private int val = 0;
@@ -86,27 +92,27 @@ public class Login extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel label_1 = new JLabel("");
-		label_1.addMouseListener(new MouseAdapter() {
+		JLabel btn_exit = new JLabel("");
+		btn_exit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				label_1.setBackground(Color.RED);
+				btn_exit.setBackground(Color.RED);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				label_1.setBackground(Color.RED);
+				btn_exit.setBackground(Color.RED);
 			}
 		});
-		label_1.addMouseListener(new MouseAdapter() {
+		btn_exit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Login.this.dispose();
 			}
 		});
-		label_1.setIcon(new ImageIcon(Login.class.getResource("/Images/close.png")));
-		label_1.setBounds(315, 2, 46, 25);
-		panel.add(label_1);
+		btn_exit.setIcon(new ImageIcon(Login.class.getResource("/Images/close.png")));
+		btn_exit.setBounds(315, 2, 46, 25);
+		panel.add(btn_exit);
 
 		JLabel lblSignIn = new JLabel("Sign In");
 		lblSignIn.setForeground(Color.WHITE);
@@ -114,39 +120,39 @@ public class Login extends JFrame {
 		lblSignIn.setBounds(130, 82, 91, 25);
 		panel.add(lblSignIn);
 
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Login.class.getResource("/Images/user.png")));
-		label.setBounds(133, 11, 64, 71);
-		panel.add(label);
+		JLabel label_aviator = new JLabel("");
+		label_aviator.setIcon(new ImageIcon(Login.class.getResource("/Images/user.png")));
+		label_aviator.setBounds(133, 11, 64, 71);
+		panel.add(label_aviator);
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/Images/topBar.png")));
-		lblNewLabel.setBounds(0, -197, 438, 424);
-		panel.add(lblNewLabel);
+		JLabel lbl_SignInPanel = new JLabel("");
+		lbl_SignInPanel.setIcon(new ImageIcon(Login.class.getResource("/Images/topBar.png")));
+		lbl_SignInPanel.setBounds(0, -197, 438, 424);
+		panel.add(lbl_SignInPanel);
 
-		JLabel lblNewLabel_1 = new JLabel("Username");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel_1.setBounds(19, 239, 72, 25);
-		panel.add(lblNewLabel_1);
+		JLabel lbl_username = new JLabel("Username");
+		lbl_username.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl_username.setBounds(19, 239, 72, 25);
+		panel.add(lbl_username);
 
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblPassword.setBounds(19, 301, 72, 25);
-		panel.add(lblPassword);
+		JLabel lbl_Password = new JLabel("Password");
+		lbl_Password.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl_Password.setBounds(19, 301, 72, 25);
+		panel.add(lbl_Password);
 
-		textField = new JTextField();
-		textField.setBackground(SystemColor.menu);
-		textField.setBounds(105, 228, 210, 34);
-		textField.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.add(textField);
-		textField.setColumns(10);
+		txt_username = new JTextField();
+		txt_username.setBackground(SystemColor.menu);
+		txt_username.setBounds(105, 228, 210, 34);
+		txt_username.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.add(txt_username);
+		txt_username.setColumns(10);
 
-		textField_1 = new JPasswordField();
-		textField_1.setBackground(SystemColor.menu);
-		textField_1.setColumns(10);
-		textField_1.setBounds(105, 292, 210, 34);
-		textField_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.add(textField_1);
+		txt_password = new JPasswordField();
+		txt_password.setBackground(SystemColor.menu);
+		txt_password.setColumns(10);
+		txt_password.setBounds(105, 292, 210, 34);
+		txt_password.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.add(txt_password);
 
 		JLabel lblSignIn_2 = new JLabel("Sign In");
 		lblSignIn_2.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
@@ -154,81 +160,119 @@ public class Login extends JFrame {
 		lblSignIn_2.setBounds(185, 384, 57, 25);
 		panel.add(lblSignIn_2);
 
-		JLabel label_2 = new JLabel("");
-		label_2.setForeground(Color.RED);
-		label_2.setBackground(Color.RED);
-		label_2.setBounds(105, 273, 159, 14);
-		panel.add(label_2);
+		JLabel error_username = new JLabel("");
+		error_username.setForeground(Color.RED);
+		error_username.setBackground(Color.RED);
+		error_username.setBounds(105, 273, 159, 14);
+		panel.add(error_username);
 
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setForeground(Color.RED);
-		lblNewLabel_2.setBounds(105, 337, 156, 14);
-		panel.add(lblNewLabel_2);
+		JLabel error_password = new JLabel("");
+		error_password.setForeground(Color.RED);
+		error_password.setBounds(105, 337, 156, 14);
+		panel.add(error_password);
 
-		JLabel lblSignIn_1 = new JLabel("");
-		lblSignIn_1.addMouseListener(new MouseAdapter() {
+		JLabel label_error = new JLabel("");
+		label_error.setForeground(Color.RED);
+		label_error.setBackground(Color.RED);
+		label_error.setBounds(19, 213, 296, 14);
+		panel.add(label_error);
+
+		JLabel btn_SignIn = new JLabel("");
+		btn_SignIn.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 
-				userName = textField.getText();
-				password = textField_1.getText();
+				userName = txt_username.getText();
+				password = txt_password.getText();
+				JFrame f = new JFrame("Window");
+				f.setUndecorated(true);
+				f.setBounds(100, 100, 344, 450);
+				f.setLocationRelativeTo(null);
+				AWTUtilities.setWindowOpacity(f, 0.1f);
+				f.setOpacity(0.8f);
+				LoadingPanel imagePanel = new LoadingPanel();
+				JPanel jp = null;
+				try {
+					jp = imagePanel.LoadingPanel();
+				} catch (Exception ex) {
+					Logger.getLogger(LoadingPanel.class.getName()).log(Level.SEVERE, null, ex);
+				}
+				f.setContentPane(jp);
+				f.setBackground(new Color(0, 0, 0, 0)); // <-- THIS CAUSES FLICKERING
+//	                f.pack();
 
 				if (userName == null || userName.equals("") || password == null || password.equals("")) {
 					if (userName == null || userName.isEmpty()) {
 						errorMsg = "Please enter username";
-						label_2.setText(errorMsg);
-						label_2.setVisible(true);
+						error_username.setText(errorMsg);
+						error_username.setVisible(true);
 					}
 					if (password == null || password.isEmpty()) {
 						errorMsg = "Please enter password";
-						lblNewLabel_2.setText(errorMsg);
-						lblNewLabel_2.setVisible(true);
+						error_password.setText(errorMsg);
+						error_password.setVisible(true);
 					}
-				} else
+				} else if (userName != null) {
+//					f.setVisible(true);
 					try {
-
+//						f.setVisible(true);
 						boolean flag = questionnaire.getSurveyAccess(userName, password);
+//						f.setVisible(true);
 						System.out.println("LOGIN : " + flag);
-
+//						f.setVisible(true);
 						if (flag == true) {
-							UserHome userHome = new UserHome();
-							userHome.setUndecorated(true);
-							userHome.setVisible(true);
-							userHome.setLocationRelativeTo(null);
-							Login.this.dispose();
+							if (userName.equals("admin")) {
+								AdminHome adminHome = new AdminHome(null);
+								adminHome.setUndecorated(true);
+								adminHome.setVisible(true);
+								adminHome.setLocationRelativeTo(null);
+								Login.this.dispose();
+							} else {
+								UserHome userHome = new UserHome();
+								userHome.setUndecorated(true);
+								userHome.setVisible(true);
+								userHome.setLocationRelativeTo(null);
+								Login.this.dispose();
+							}
 						} else {
 							System.out.println("\n\nrasika lakshan 123");
+							errorMsg = "The password or username that you've entered is incorrect.";
+							label_error.setText(errorMsg);
+							label_error.setVisible(true);
+//							f.setVisible(false);
+
 						}
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 //						e.printStackTrace();
 						System.out.println("rasika lakshan");
 						errorMsg = "The password or username that you've entered is incorrect.";
-						lblNewLabel_2.setText(errorMsg);
-						lblNewLabel_2.setVisible(true);
+						label_error.setText(errorMsg);
+						label_error.setVisible(true);
 					}
+				}
 			}
 		});
 
-		textField.addKeyListener(new KeyAdapter() {
+		txt_username.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				label_2.setVisible(false);
+				error_username.setVisible(false);
 			}
 		});
 
-		textField_1.addKeyListener(new KeyAdapter() {
+		txt_password.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				lblNewLabel_2.setVisible(false);
+				error_password.setVisible(false);
 			}
 		});
 
-		lblSignIn_1.setForeground(Color.BLACK);
-		lblSignIn_1.setIcon(new ImageIcon(Login.class.getResource("/Images/signinBtn.png")));
-		lblSignIn_1.setBounds(130, 373, 166, 50);
-		panel.add(lblSignIn_1);
+		btn_SignIn.setForeground(Color.BLACK);
+		btn_SignIn.setIcon(new ImageIcon(Login.class.getResource("/Images/signinBtn.png")));
+		btn_SignIn.setBounds(130, 373, 166, 50);
+		panel.add(btn_SignIn);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(105, 263, 210, 2);
