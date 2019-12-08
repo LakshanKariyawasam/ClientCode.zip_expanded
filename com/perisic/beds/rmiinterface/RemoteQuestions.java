@@ -67,6 +67,6 @@ public interface RemoteQuestions extends Remote {
 	Integer addQuestionToSurvey(String questionDesc, String option, Boolean status) throws RemoteException;
 
 
-	public int createPaneUser(String currntUserName, String usrname, String pswd, boolean isSuper) throws RemoteException;
+	public Integer createPaneUser(String currntUserName, String usrname, String pswd, boolean isSuper) throws RemoteException;
 	
 }
