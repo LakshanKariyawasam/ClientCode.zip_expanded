@@ -237,7 +237,7 @@ public class Login extends JFrame {
 							}
 						} else {
 							System.out.println("\n\nrasika lakshan 123");
-							errorMsg = "The password or username that you've entered is incorrect.";
+							errorMsg = "Username or The password is incorrect.";
 							label_error.setText(errorMsg);
 							label_error.setVisible(true);
 //							f.setVisible(false);
