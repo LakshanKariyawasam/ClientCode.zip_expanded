@@ -34,6 +34,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.Canvas;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -57,6 +59,14 @@ import javax.swing.table.TableCellRenderer;
 import com.perisic.beds.questionnaire.Answers;
 import com.perisic.beds.questionnaire.QuestionSet;
 
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
 import javax.swing.ListSelectionModel;
@@ -66,6 +76,7 @@ public class AdminHome extends JFrame {
 
 	private JPanel contentPane;
 	private int val = 0;
+	private Stage stage; 
 
 	/**
 	 * Launch the application.
@@ -426,15 +437,62 @@ public class AdminHome extends JFrame {
 		panel_3.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(10, -248, 784, 570);
+		lblNewLabel.setBounds(10, 22, 774, 75);
 		lblNewLabel.setIcon(new ImageIcon(AdminHome.class.getResource("/Images/bar.png")));
 		panel_3.add(lblNewLabel);
 
-		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon(AdminHome.class.getResource("/Images/output-onlinepngtools (1).png")));
-		label_3.setBounds(68, 24, 628, 423);
-		panel_3.add(label_3);
+//	       JFrame frame = new JFrame("FX");
+	       final JFXPanel fxPanel = new JFXPanel();
+	       fxPanel.setBounds(0, 266, 612, -266);
+//	       frame.add(fxPanel);
+//	       frame.setVisible(true);
+	       panel_3.add(fxPanel);
 
+	       Platform.runLater(new Runnable() {
+	           @Override
+	           public void run() {
+//	               initFX();
+
+					try {
+						stage = new Stage();
+						
+						// set title for the stage 
+						stage.setTitle("Dashboard"); 
+   
+						// create a webview object 
+						WebView w = new WebView(); 
+   
+						// get the web engine 
+						WebEngine e = w.getEngine();
+						e.load("https://chart-service.herokuapp.com/tasks/zdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4/1"); 
+   
+						// create a scene 
+						Scene scene = new Scene(w, w.getPrefWidth(),  
+						                         w.getPrefHeight()); 
+   
+						// set the scene 
+						stage.setScene(scene); 
+						
+//		                ObservableList<Node> children = root.getChildren();
+//		                children.add(w);                     
+		                 
+		                fxPanel.setScene(scene);  
+
+
+//			            SwingUtilities.invokeLater(() -> {
+//			            	panel_3.add(fxPanel);
+////			                panel_3.pack();
+//			                panel_3.setVisible(true);
+//			            });
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+
+	           }
+	       });
+
+	       
 //		JScrollPane  scrollPane = new JScrollPane (panel_3, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //		scrollPane.setEnabled(true);
 //		scrollPane.setBounds(0, 0, 784, 570);
@@ -519,6 +577,40 @@ public class AdminHome extends JFrame {
 			}
 		});
 	}
+	
+//	   private static void initFX(JFXPanel fxPanel) {
+////	       // This method is invoked on JavaFX thread
+////	       Scene scene = createScene();
+////	       fxPanel.setScene(scene);
+//		   
+//		   try { 
+//		        
+//				// set title for the stage 
+//	            stage.setTitle("Dashboard"); 
+//	   
+//	            // create a webview object 
+//	            WebView w = new WebView(); 
+//	   
+//	            // get the web engine 
+//	            WebEngine e = w.getEngine();
+//	            e.load("https://chart-service.herokuapp.com/tasks/zdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4/1"); 
+//	   
+//	            // create a scene 
+//	            Scene scene = new Scene(w, w.getPrefWidth(),  
+//	                                     w.getPrefHeight()); 
+//	   
+//	            // set the scene 
+//	            stage.setScene(scene); 
+//	   
+//	            stage.show(); 
+//	        } 
+//	   
+//	        catch (Exception e) { 
+//	   
+//	            System.out.println(e.getMessage()); 
+//	        } 
+//	   
+//	   }
 }
 
 //BUTTON RENDERER CLASS

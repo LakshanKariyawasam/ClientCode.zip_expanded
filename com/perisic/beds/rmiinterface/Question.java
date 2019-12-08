@@ -17,6 +17,7 @@ public class Question implements Serializable {
 	private String [] answers; 
 	private String questionText; 
 	private String answerType; 
+	private Integer questionId;
 	private Boolean questionStatus;
 	private Hashtable<String,Integer> frequencies = new Hashtable<String,Integer>(); 
 
@@ -54,6 +55,14 @@ public class Question implements Serializable {
 	 */
 	public Boolean getStatus() { 
 		return questionStatus; 
+	}
+	
+	/**
+	 * What is the quesid? 
+	 * @return the quesid. 
+	 */
+	public Integer getQuestionId() { 
+		return questionId; 
 	}
 	/** 
 	 * What are the options? 

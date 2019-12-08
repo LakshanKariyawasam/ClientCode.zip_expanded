@@ -125,6 +125,7 @@ public class Answers {
 		ArrayList<String> quesData = new ArrayList<String>();
 		ArrayList<String> enumData = new ArrayList<String>();
 		ArrayList<String> statusData = new ArrayList<String>();
+		ArrayList<String> quesId = new ArrayList<String>();
 		for(int i = 0; i < myData.size(); i++ ) { 
 			Question qq = myData.elementAt(i);
 			quesData.add(qq.getQuestionText());
@@ -145,6 +146,7 @@ public class Answers {
 				valStatus = "Inactive";
 			}
 			statusData.add(valStatus);
+//			quesId.add(qq.getQuestionId().toString());
 			report += "}";
 			
 		}
